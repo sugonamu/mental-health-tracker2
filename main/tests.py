@@ -24,3 +24,10 @@ class MainTest(TestCase):
           mood_intensity = 8,
         )
         self.assertTrue(mood.is_mood_strong)
+
+    def test_main_using_main_template(self):
+        # Log in the user and set the cookie
+        self.client.login(username='testuser', password='12345')
+        self.client.cookies['last_login'] = '2024-09-20T12:00:00Z'
+        response = self.client.get('')
+        self.assertTemplateUsed(response, 'main.html')
